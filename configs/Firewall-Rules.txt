@@ -1,0 +1,53 @@
+# Firewall Configuration - FortiGate
+# Ubuntu Freight Solutions
+# Systems Administrator - Sibonelo Lukhele
+# Student Number: ST10443746
+# Module: XINM6329 Work Integrated Learning
+# Date: October 2026
+
+# DMZ to Internal Server VLAN
+config firewall policy
+    edit 1
+        set name "DMZ-to-Server"
+        set srcintf "dmz"
+        set dstintf "server-vlan"
+        set srcaddr "Web-Servers"
+        set dstaddr "DB-Servers"
+        set action accept
+        set schedule "always"
+        set service "HTTPS" "SQL"
+        set utm-status enable
+        set av-profile "default"
+        set ips-sensor "default"
+        set logtraffic all
+    next
+end
+
+# Allow Management VLAN to Server VLAN
+config firewall policy
+    edit 2
+        set name "Management-to-Server"
+        set srcintf "management-vlan"
+        set dstintf "server-vlan"
+        set srcaddr "IT-Admins"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "RDP" "SSH" "HTTPS"
+        set logtraffic all
+    next
+end
+
+# Deny DMZ to Management VLAN (Security)
+config firewall policy
+    edit 3
+        set name "Deny-DMZ-to-Management"
+        set srcintf "dmz"
+        set dstintf "management-vlan"
+        set srcaddr "all"
+        set dstaddr "all"
+        set action deny
+        set schedule "always"
+        set logtraffic all
+    next
+end
