@@ -1,1 +1,26 @@
 
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| UserProvisioning.ps1 | Automates AD user creation |
+| BackupVerification.ps1 | Verifies backup completion |
+| ServerHealthCheck.ps1 | Monitors server performance |
+
+## Configurations
+
+| File | Purpose |
+|------|---------|
+| VLAN-Config.txt | Cisco switch VLAN configuration |
+| Firewall-Rules.txt | FortiGate firewall rules for DMZ |
+
+## Requirements
+
+- PowerShell 5.1 or later
+- Active Directory module
+- Administrative privileges
+
+## Usage
+
+```powershell
+.\scripts\UserProvisioning.ps1 -FirstName "John" -LastName "Doe" -Department "IT" -Manager "Jane Smith"
